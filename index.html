@@ -1043,7 +1043,7 @@
   }
 
   function renderChart(t) {
-    const width = 680, height = 220, padL = 28, padR = 8, padT = 16, padB = 40;
+    const width = 680, height = 250, padL = 28, padR = 8, padT = 16, padB = 70;
     const buckets = [];
     const now = new Date();
     if (chartRange === 'monthly') {
@@ -1089,7 +1089,9 @@
         y -= h;
         svg += '<rect x="' + x.toFixed(1) + '" y="' + y.toFixed(1) + '" width="' + Math.max(barW, 1).toFixed(1) + '" height="' + h.toFixed(1) + '" fill="' + colors[k] + '" rx="3"/>';
       });
-      svg += '<text x="' + (x + barW / 2).toFixed(1) + '" y="' + (height - 14) + '" text-anchor="middle" font-size="11" fill="#6B5A54">' + escapeHtml(b.label) + '</text>';
+      const tx = (x + barW / 2).toFixed(1);
+      const ty = (height - 38);
+      svg += '<text x="' + tx + '" y="' + ty + '" text-anchor="end" transform="rotate(-42 ' + tx + ' ' + ty + ')" font-size="12" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" fill="#6B5A54">' + escapeHtml(b.label) + '</text>';
     });
     svg += '</svg>';
     return svg;
