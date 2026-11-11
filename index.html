@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#F6EFE7">
+  <meta name="description" content="LilBit BigLife is a private reflection companion for LillyClaire. Saved only on this phone.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23C45B62'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-size='28' fill='%23F6EFE7' font-family='Georgia,serif'%3EL%3C/text%3E%3C/svg%3E">
+  <title>LilBit BigLife — for LillyClaire</title>
+  <style>
+    :root {
+      --bg: #F6EFE7;
+      --bg-2: #FBF7F2;
+      --card: #FFFcf8;
+      --ink: #3A2E2A;
+      --ink-soft: #6B5A54;
+      --muted: #8A786F;
+      --accent: #C45B62;
+      --accent-deep: #9E3F4A;
+      --accent-soft: #F3D6D6;
+      --sage: #5E7A68;
+      --sage-soft: #D9E6DC;
+      --gold: #B8894A;
+      --gold-soft: #F3E4C8;
+      --blush: #E8C9C4;
+      --line: #E6D9CE;
+      --shadow: 0 8px 28px rgba(58, 46, 42, 0.08);
+      --font-serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+      --font-sans: "Avenir Next", "Segoe UI", "Helvetica Neue", -apple-system, BlinkMacSystemFont, Roboto, "Noto Sans", sans-serif;
+      --radius: 18px;
+      --tap: 48px;
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; max-width: 100%; overflow-x: hidden; }
+    html { height: 100%; }
+    body {
+      min-height: 100%;
+      font-family: var(--font-sans);
+      color: var(--ink);
+      background:
+        radial-gradient(1200px 500px at 10% -10%, #f8e3dc 0%, transparent 50%),
+        radial-gradient(900px 400px at 110% 10%, #eadfcb 0%, transparent 46%),
+        var(--bg);
+      line-height: 1.5;
+      font-size: 17px;
+      padding-bottom: calc(84px + var(--safe-bottom));
+    }
+    img, svg, canvas, table, pre, button, input, textarea, select { max-width: 100%; }
+    h1, h2, h3, .brand-title, .affirmation-text, .stat-value {
+      font-family: var(--font-serif);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+    h1 { font-size: 1.85rem; margin: 0; }
+    h2 { font-size: 1.35rem; margin: 0 0 0.6rem; }
+    h3 { font-size: 1.1rem; margin: 0 0 0.4rem; }
+    p { margin: 0 0 0.85rem; }
+    p:last-child { margin-bottom: 0; }
+    a { color: var(--accent-deep); }
+    .wrap { width: min(760px, 100%); margin: 0 auto; padding: 20px 18px 8px; }
+    header.app-header { padding-top: 8px; margin-bottom: 18px; }
+    .brand-kicker {
+      display: inline-block; font-size: 0.78rem; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--accent-deep); font-weight: 600; margin-bottom: 4px;
+    }
+    .brand-title { font-size: clamp(2rem, 6vw, 2.6rem); }
+    .brand-for { font-family: var(--font-serif); font-style: italic; font-size: 1.2rem; color: var(--ink-soft); margin-top: 4px; }
+    .privacy-note, .safety-note, .hint { color: var(--ink-soft); font-size: 0.92rem; }
+    .privacy-note {
+      margin-top: 12px; padding: 10px 12px; background: rgba(255,255,255,0.5);
+      border: 1px solid var(--line); border-radius: 12px;
+    }
+    .card {
+      background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+      box-shadow: var(--shadow); padding: 18px; margin-bottom: 14px;
+    }
+    .card.soft { background: var(--bg-2); box-shadow: none; }
+    .row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+    .row.spread { justify-content: space-between; }
+    .stack { display: flex; flex-direction: column; gap: 10px; }
+    label, .label { display: block; font-size: 0.86rem; font-weight: 600; color: var(--ink-soft); margin-bottom: 6px; }
+    input[type="text"], textarea, select {
+      width: 100%; font: inherit; color: var(--ink); background: #fff;
+      border: 1.5px solid var(--line); border-radius: 12px; padding: 12px 14px; min-height: var(--tap);
+    }
+    textarea { min-height: 96px; resize: vertical; line-height: 1.45; }
+    input:focus, textarea:focus, select:focus, button:focus-visible {
+      outline: 3px solid var(--accent-soft); outline-offset: 1px; border-color: var(--accent);
+    }
+    button, .btn {
+      font: inherit; font-weight: 600; border: 0; border-radius: 14px; min-height: var(--tap);
+      padding: 12px 16px; cursor: pointer; color: var(--ink); background: #efe4d8;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover { background: var(--accent-deep); }
+    .btn-sage { background: var(--sage); color: #fff; }
+    .btn-ghost { background: transparent; border: 1.5px solid var(--line); }
+    .btn-text { background: transparent; color: var(--accent-deep); padding: 8px 10px; min-height: 44px; }
+    .btn-danger { background: #f3e0de; color: var(--accent-deep); }
+    button:disabled, .btn:disabled { opacity: 0.45; cursor: not-allowed; }
+    .btn-block { width: 100%; }
+    .chip {
+      display: inline-flex; align-items: center; gap: 6px; font-size: 0.8rem; font-weight: 600;
+      padding: 4px 10px; border-radius: 999px; background: var(--gold-soft); color: #7a5524;
+    }
+    .chip.words { background: var(--sage-soft); color: #2f4c3b; }
+    .chip.told { background: var(--accent-soft); color: var(--accent-deep); }
+    .chip.example { background: #eee6da; color: var(--ink-soft); }
+    .chip.worry { background: var(--gold-soft); color: #7a5524; }
+    .chip.hurt { background: var(--accent-soft); color: var(--accent-deep); }
+    .chip.right { background: var(--sage-soft); color: #2f4c3b; }
+    .chip.paused { background: #eee6da; color: var(--ink-soft); }
+    .friend-card h3 { margin-bottom: 2px; }
+    .item-list { list-style: none; margin: 12px 0 0; padding: 0; }
+    .item-list li {
+      padding: 10px 0; border-top: 1px solid var(--line); display: flex; gap: 8px;
+      align-items: flex-start; justify-content: space-between;
+    }
+    .item-list li span:first-child { flex: 1; min-width: 0; word-wrap: break-word; }
+    .empty { text-align: center; color: var(--ink-soft); padding: 22px 10px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .tabbar {
+      position: fixed; left: 0; right: 0; bottom: 0; display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 6px; padding: 8px 10px calc(8px + var(--safe-bottom));
+      background: rgba(251, 247, 242, 0.96); border-top: 1px solid var(--line);
+      backdrop-filter: blur(10px); z-index: 20;
+    }
+    .tabbar button {
+      background: transparent; border-radius: 14px; min-height: 56px; display: flex;
+      flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+      font-size: 0.82rem; color: var(--ink-soft);
+    }
+    .tabbar button[aria-selected="true"] { background: #fff; color: var(--accent-deep); box-shadow: var(--shadow); }
+    .tabbar .ico { font-size: 1.15rem; line-height: 1; }
+    .welcome { font-size: 1.02rem; }
+    .prompt-box {
+      background: #fff; border: 1px dashed var(--blush); border-radius: 12px;
+      padding: 12px 14px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.95rem;
+    }
+    .choice {
+      display: flex; gap: 8px; align-items: flex-start; width: 100%; text-align: left;
+      background: #fff; border: 1.5px solid var(--line); border-radius: 14px; padding: 12px 14px; min-height: var(--tap);
+    }
+    .choice.selected { border-color: var(--accent); background: #fff6f4; }
+    .choice input { width: 20px; height: 20px; margin-top: 3px; flex: 0 0 auto; accent-color: var(--accent); }
+    .choice .choice-body { flex: 1; min-width: 0; }
+    .template {
+      background: var(--bg-2); border-left: 3px solid var(--accent); padding: 12px 14px;
+      border-radius: 0 12px 12px 0; font-family: var(--font-serif); font-style: italic; word-wrap: break-word;
+    }
+    .affirmation-view { text-align: center; padding: 28px 16px 18px; }
+    .affirmation-text { font-size: clamp(1.35rem, 4.4vw, 1.85rem); line-height: 1.35; margin: 12px 0 18px; }
+    .family-saying { font-family: var(--font-serif); font-style: italic; font-size: 1.12rem; color: var(--ink-soft); margin-top: 8px; }
+    .stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .stat { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 14px; }
+    .stat-value { font-size: 1.8rem; color: var(--accent-deep); display: block; }
+    .stat-label { font-size: 0.82rem; color: var(--ink-soft); }
+    .chart-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .chart-wrap svg { display: block; width: 100%; height: auto; }
+    .legend { display: flex; flex-wrap: wrap; gap: 10px 14px; font-size: 0.82rem; color: var(--ink-soft); margin-top: 8px; }
+    .swatch { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 6px; }
+    .history-item { padding-bottom: 4px; }
+    .history-meta { color: var(--muted); font-size: 0.86rem; margin: 4px 0 8px; }
+    .toast {
+      position: fixed; left: 50%; bottom: calc(96px + var(--safe-bottom)); transform: translateX(-50%);
+      background: var(--ink); color: #fff; padding: 10px 16px; border-radius: 999px; font-size: 0.9rem;
+      z-index: 40; opacity: 0; pointer-events: none; transition: opacity 0.2s ease;
+      max-width: calc(100% - 32px); text-align: center;
+    }
+    .toast.show { opacity: 1; }
+    .footer-notes { margin-top: 8px; padding-bottom: 12px; }
+    .hidden { display: none !important; }
+    .sr-only {
+      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+    }
+    .item-fields .field { margin-bottom: 10px; }
+    .range-toggle { display: flex; gap: 6px; }
+    .range-toggle button[aria-pressed="true"] { background: var(--accent); color: #fff; }
+    @media (min-width: 800px) {
+      body { padding-bottom: 24px; }
+      .tabbar {
+        position: static; width: min(760px, 100%); margin: 0 auto 8px; padding: 8px;
+        border: 1px solid var(--line); border-radius: 18px; background: rgba(255,252,248,0.9); box-shadow: var(--shadow);
+      }
+      .wrap { padding-top: 12px; }
+      .stats { grid-template-columns: repeat(4, 1fr); }
+    }
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  </style>
+</head>
+
+<body>
+  <a class="sr-only" href="#main">Skip to content</a>
+  <nav class="tabbar" role="tablist" aria-label="Main">
+    <button type="button" role="tab" id="tab-friends" data-testid="tab-friends" aria-selected="true" aria-controls="view-friends">
+      <span class="ico" aria-hidden="true">✦</span>Friends
+    </button>
+    <button type="button" role="tab" id="tab-worried" data-testid="tab-worried" aria-selected="false" aria-controls="view-worried">
+      <span class="ico" aria-hidden="true">♡</span>I'm Worried
+    </button>
+    <button type="button" role="tab" id="tab-trends" data-testid="tab-trends" aria-selected="false" aria-controls="view-trends">
+      <span class="ico" aria-hidden="true">✧</span>My Trends
+    </button>
+  </nav>
+
+  <header class="app-header wrap">
+    <div class="brand-kicker">A quiet place to check the facts</div>
+    <h1 class="brand-title">LilBit BigLife</h1>
+    <div class="brand-for">for LillyClaire</div>
+    <p class="privacy-note" data-testid="privacy-note">Saved only on this phone. Nothing is shared unless you share it.</p>
+  </header>
+
+  <main id="main" class="wrap">
+    <section id="view-friends" role="tabpanel" aria-labelledby="tab-friends" data-testid="view-friends"></section>
+    <section id="view-worried" class="hidden" role="tabpanel" aria-labelledby="tab-worried" data-testid="view-worried"></section>
+    <section id="view-trends" class="hidden" role="tabpanel" aria-labelledby="tab-trends" data-testid="view-trends"></section>
+
+    <footer class="footer-notes">
+      <p class="safety-note" data-testid="safety-note">If worry feels too big, talk to a parent or a trusted adult. In the US, you can call or text 988 if you ever feel unsafe or hopeless.</p>
+      <p class="hint">LilBit BigLife is a reflection tool, not therapy, and it is not a clinical service.</p>
+    </footer>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <input type="file" id="import-file" class="sr-only" accept="application/json,.json" aria-label="Import backup file">
+
+  <script>
+
+(function () {
+  const STORAGE_KEY = 'lilbit-biglife-lillyclaire-v1';
+  const MAX_FRIENDS = 5;
+  const MAX_ITEMS = 5;
+  const ASK_PROMPT = "Hey! I'm trying to be a better friend, and I'm writing down the things that matter most to the people I care about. Would you tell me 5 things that really hurt or disappoint you in a friendship? I want to know so I can be careful with what matters to you. Thank you — I care about you.";
+  const ASK_AGAIN = "Hey, I want to make sure I understand what matters to you. Could you tell me again the things that hurt or disappoint you in a friendship? I want to get it right.";
+  const AFFIRMATIONS = [
+    "Then trust her, and trust yourself. Don't let fear drive your emotions. LillyClaire, you're a wonderful friend unless someone tells you otherwise. Assume the best.",
+    "LillyClaire, you checked the facts instead of letting fear decide. That's what a good friend does — including being a good friend to yourself.",
+    "Nothing on the list happened. Your friend's words matter, and so does your own honesty. LillyClaire, you can let this worry go.",
+    "The assumption is always for the good. LillyClaire, believe the best about your friends — and about yourself.",
+    "LillyClaire, you're a wonderful friend unless someone tells you otherwise. Trust her, and trust yourself."
+  ];
+  const FAMILY_SAYING = "Be your own friend and fan. We believe everything we tell ourselves, so tell yourself good things about you.";
+
+  const EXAMPLE_FRIENDS = [
+    {
+      name: "Maya",
+      items: [
+        "Feeling left out when plans are made without me",
+        "Sharing something I told you in confidence",
+        "Cancelling on me at the last minute a lot",
+        "Making a joke about something I'm sensitive about",
+        "Not checking in when you know I'm having a hard time"
+      ]
+    },
+    {
+      name: "Jordan",
+      items: [
+        "Putting me in the middle of other people's drama",
+        "Going quiet and not telling me if I upset you",
+        "Comparing me to other friends",
+        "Ignoring a message for a long time when we're already talking",
+        "Acting different around me when other people are there"
+      ]
+    },
+    {
+      name: "Priya",
+      items: [
+        "Not keeping a promise I was counting on",
+        "Talking over me or dismissing my feelings",
+        "Using a story I shared to tease me later",
+        "Choosing a group when I asked for one-on-one time",
+        "Assuming I'm fine just because I didn't say I wasn't"
+      ]
+    }
+  ];
+
+  let state = loadState();
+  let tab = 'friends';
+  let friendForm = null;
+  let checkin = null;
+  let chartRange = 'weekly';
+  let affirmIndex = 0;
+
+  function uid() {
+    return (crypto.randomUUID && crypto.randomUUID()) || ('id-' + Date.now().toString(36) + Math.random().toString(16).slice(2));
+  }
+  function defaultState() { return { version: 1, friends: [], history: [] }; }
+  function loadState() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return defaultState();
+      const data = JSON.parse(raw);
+      if (!data || !Array.isArray(data.friends) || !Array.isArray(data.history)) return defaultState();
+      data.version = 1;
+      return data;
+    } catch (e) { return defaultState(); }
+  }
+  function save() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  }
+  function escapeHtml(str) {
+    return String(str == null ? '' : str)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+  function toast(msg) {
+    const el = document.getElementById('toast');
+    el.textContent = msg;
+    el.classList.add('show');
+    clearTimeout(toast._t);
+    toast._t = setTimeout(function () { el.classList.remove('show'); }, 2200);
+  }
+  function startOfDay(d) {
+    const x = new Date(d);
+    x.setHours(0, 0, 0, 0);
+    return x;
+  }
+  function formatDate(iso) {
+    try {
+      return new Date(iso).toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
+    } catch (e) { return iso; }
+  }
+  function daysAgo(n, hour) {
+    const d = new Date();
+    d.setDate(d.getDate() - n);
+    d.setHours(hour == null ? 16 : hour, 10, 0, 0);
+    return d.toISOString();
+  }
+  function mondayOf(d) {
+    const x = startOfDay(d);
+    const day = (x.getDay() + 6) % 7;
+    x.setDate(x.getDate() - day);
+    return x;
+  }
+  function monthKey(d) {
+    const x = new Date(d);
+    return x.getFullYear() + '-' + String(x.getMonth() + 1).padStart(2, '0');
+  }
+  function localKey(d) {
+    const x = new Date(d);
+    return x.getFullYear() + '-' + String(x.getMonth() + 1).padStart(2, '0') + '-' + String(x.getDate()).padStart(2, '0');
+  }
+  function friendById(id) { return state.friends.find(function (f) { return f.id === id; }); }
+  function hasExamples() { return state.friends.some(function (f) { return f.isExample; }); }
+
+  async function shareOrCopy(text) {
+    if (navigator.share) {
+      try { await navigator.share({ text: text }); toast('Ready to share.'); return; }
+      catch (e) { if (e && e.name === 'AbortError') return; }
+    }
+    try {
+      await navigator.clipboard.writeText(text);
+      toast('Copied to your clipboard.');
+    } catch (e) {
+      window.prompt('Copy this message:', text);
+    }
+  }
+
+  function setTab(next) {
+    tab = next;
+    document.querySelectorAll('.tabbar [role="tab"]').forEach(function (btn) {
+      const on = btn.id === 'tab-' + next;
+      btn.setAttribute('aria-selected', on ? 'true' : 'false');
+    });
+    document.getElementById('view-friends').classList.toggle('hidden', next !== 'friends');
+    document.getElementById('view-worried').classList.toggle('hidden', next !== 'worried');
+    document.getElementById('view-trends').classList.toggle('hidden', next !== 'trends');
+    if (next === 'friends') renderFriends();
+    if (next === 'worried') renderWorried();
+    if (next === 'trends') renderTrends();
+    window.scrollTo(0, 0);
+  }
+
+  function sourceLabel(src) {
+    return src === 'in-her-words' ? 'In her own words' : 'What she told me';
+  }
+
+  function renderFriends() {
+    const root = document.getElementById('view-friends');
+    const remaining = MAX_FRIENDS - state.friends.length;
+    if (friendForm) {
+      root.innerHTML = renderFriendForm();
+      bindFriendForm(root);
+      return;
+    }
+    let html = '';
+    html += '<article class="card welcome" data-testid="welcome">';
+    html += '<p>Hey, LillyClaire. This is a place to keep what your close friends have told you matters most — and to check a worry against those facts, instead of letting fear decide.</p>';
+    html += '<p>The assumption is always for the good. You are a wonderful friend unless someone tells you otherwise.</p>';
+    html += '</article>';
+
+    if (!state.friends.length) {
+      html += '<div class="card soft empty" data-testid="friends-empty">You don\'t have any friends listed yet. You can add up to 5, or load a few fictional examples just to try the app. Example friends are clearly marked and easy to remove.</div>';
+    } else {
+      state.friends.forEach(function (f) { html += renderFriendCard(f); });
+    }
+
+    html += '<div class="actions">';
+    html += '<button type="button" class="btn-primary" data-testid="btn-add-friend"' + (remaining <= 0 ? ' disabled' : '') + '>Add a friend' + (remaining <= 0 ? '' : ' (' + remaining + ' left)') + '</button>';
+    if (hasExamples()) {
+      html += '<button type="button" class="btn-ghost" data-testid="btn-remove-examples">Remove example friends</button>';
+    } else {
+      html += '<button type="button" class="btn-ghost" data-testid="btn-load-examples"' + (remaining <= 0 ? ' disabled' : '') + '>Load example friends</button>';
+    }
+    html += '</div>';
+    html += '<div class="actions">';
+    html += '<button type="button" class="btn-text" data-testid="btn-export">Export backup</button>';
+    html += '<button type="button" class="btn-text" data-testid="btn-import">Import backup</button>';
+    html += '<button type="button" class="btn-text" data-testid="btn-reset">Reset all</button>';
+    html += '</div>';
+    html += '<p class="hint">Example friends (Maya, Jordan, and Priya) are fictional and only here so you can try the app. Your real friends\' names and notes stay on this phone.</p>';
+    root.innerHTML = html;
+
+    root.querySelector('[data-testid="btn-add-friend"]').addEventListener('click', function () { startFriendForm(null); });
+    const loadBtn = root.querySelector('[data-testid="btn-load-examples"]');
+    if (loadBtn) loadBtn.addEventListener('click', loadExamples);
+    const removeBtn = root.querySelector('[data-testid="btn-remove-examples"]');
+    if (removeBtn) removeBtn.addEventListener('click', removeExamples);
+    root.querySelector('[data-testid="btn-export"]').addEventListener('click', exportJson);
+    root.querySelector('[data-testid="btn-import"]').addEventListener('click', function () { document.getElementById('import-file').click(); });
+    root.querySelector('[data-testid="btn-reset"]').addEventListener('click', resetAll);
+    root.querySelectorAll('[data-edit-friend]').forEach(function (btn) {
+      btn.addEventListener('click', function () { startFriendForm(btn.getAttribute('data-edit-friend')); });
+    });
+    root.querySelectorAll('[data-delete-friend]').forEach(function (btn) {
+      btn.addEventListener('click', function () { deleteFriend(btn.getAttribute('data-delete-friend')); });
+    });
+  }
+
+  function renderFriendCard(f) {
+    let html = '<article class="card friend-card" data-testid="friend-card" data-friend-id="' + escapeHtml(f.id) + '">';
+    html += '<div class="row spread"><h3>' + escapeHtml(f.name) + '</h3>';
+    if (f.isExample) html += '<span class="chip example">Example (fictional)</span>';
+    html += '</div>';
+    if (!f.items.length) {
+      html += '<p class="hint">No list yet. Add up to 5 things that disappoint or hurt her most.</p>';
+    } else {
+      html += '<ol class="item-list">';
+      f.items.forEach(function (it) {
+        html += '<li><span>' + escapeHtml(it.text) + '</span><span class="chip ' + (it.source === 'in-her-words' ? 'words' : 'told') + '">' + escapeHtml(sourceLabel(it.source)) + '</span></li>';
+      });
+      html += '</ol>';
+    }
+    html += '<div class="actions">';
+    html += '<button type="button" class="btn-ghost" data-edit-friend="' + escapeHtml(f.id) + '">Edit</button>';
+    html += '<button type="button" class="btn-danger" data-delete-friend="' + escapeHtml(f.id) + '">Delete</button>';
+    html += '</div></article>';
+    return html;
+  }
+
+  function startFriendForm(id) {
+    const existing = id ? friendById(id) : null;
+    const items = [0,1,2,3,4].map(function (i) {
+      const it = existing && existing.items[i];
+      return { text: it ? it.text : '', source: it ? it.source : 'what-she-told-me' };
+    });
+    friendForm = {
+      id: existing ? existing.id : null,
+      name: existing ? existing.name : '',
+      method: existing ? (existing.items.some(function (i) { return i.source === 'in-her-words'; }) ? 'ask' : 'told') : null,
+      items: items,
+      isExample: existing ? !!existing.isExample : false
+    };
+    renderFriends();
+  }
+
+  function renderFriendForm() {
+    const f = friendForm;
+    const title = f.id ? 'Edit friend' : 'Add a friend';
+    let html = '<article class="card" data-testid="friend-form">';
+    html += '<h2>' + title + '</h2>';
+    html += '<label for="input-friend-name">Friend\'s name</label>';
+    html += '<input type="text" id="input-friend-name" data-testid="input-friend-name" maxlength="60" value="' + escapeHtml(f.name) + '" placeholder="First name is enough">';
+    html += '<p class="label" style="margin-top:16px">How do you want to fill in what matters to her?</p>';
+    html += '<div class="row">';
+    html += '<button type="button" class="' + (f.method === 'ask' ? 'btn-primary' : 'btn-ghost') + '" data-testid="btn-method-ask">Ask your friend</button>';
+    html += '<button type="button" class="' + (f.method === 'told' ? 'btn-primary' : 'btn-ghost') + '" data-testid="btn-method-told">Write what she told me</button>';
+    html += '</div>';
+    if (f.method === 'ask') {
+      html += '<div style="margin-top:14px">';
+      html += '<p>Here\'s a short message you can send. When she answers, write her words below and they\'ll be marked <strong>In her own words</strong>.</p>';
+      html += '<div class="prompt-box" data-testid="share-prompt">' + escapeHtml(ASK_PROMPT) + '</div>';
+      html += '<div class="actions"><button type="button" class="btn-sage" data-testid="btn-copy-prompt">Share or copy message</button></div>';
+      html += '</div>';
+    } else if (f.method === 'told') {
+      html += '<p style="margin-top:14px">Write what she has already told you. Each one will be marked <strong>What she told me</strong>.</p>';
+    }
+    if (f.method) {
+      html += '<div class="item-fields" style="margin-top:12px">';
+      for (let i = 0; i < MAX_ITEMS; i++) {
+        const src = f.items[i].source || (f.method === 'ask' ? 'in-her-words' : 'what-she-told-me');
+        html += '<div class="field">';
+        html += '<label for="item-input-' + i + '">Thing ' + (i + 1) + ' of 5</label>';
+        html += '<input type="text" id="item-input-' + i + '" data-testid="item-input-' + i + '" maxlength="200" value="' + escapeHtml(f.items[i].text) + '" placeholder="What disappoints or hurts her most">';
+        html += '<label class="sr-only" for="item-source-' + i + '">Source for thing ' + (i + 1) + '</label>';
+        html += '<select id="item-source-' + i + '" data-testid="item-source-' + i + '" style="margin-top:6px">';
+        html += '<option value="in-her-words"' + (src === 'in-her-words' ? ' selected' : '') + '>In her own words</option>';
+        html += '<option value="what-she-told-me"' + (src === 'what-she-told-me' ? ' selected' : '') + '>What she told me</option>';
+        html += '</select></div>';
+      }
+      html += '</div>';
+    }
+    html += '<div class="actions">';
+    html += '<button type="button" class="btn-primary" data-testid="btn-save-friend">Save friend</button>';
+    html += '<button type="button" class="btn-ghost" data-testid="btn-cancel-friend">Cancel</button>';
+    html += '</div></article>';
+    return html;
+  }
+
+  function bindFriendForm(root) {
+    const name = root.querySelector('[data-testid="input-friend-name"]');
+    name.addEventListener('input', function () { friendForm.name = name.value; });
+    root.querySelector('[data-testid="btn-method-ask"]').addEventListener('click', function () {
+      collectFormItems(root);
+      friendForm.method = 'ask';
+      friendForm.items.forEach(function (it) { if (!it.source || !it.text) it.source = 'in-her-words'; });
+      renderFriends();
+      document.querySelector('[data-testid="input-friend-name"]').focus();
+    });
+    root.querySelector('[data-testid="btn-method-told"]').addEventListener('click', function () {
+      collectFormItems(root);
+      friendForm.method = 'told';
+      friendForm.items.forEach(function (it) { if (!it.source || !it.text) it.source = 'what-she-told-me'; });
+      renderFriends();
+      document.querySelector('[data-testid="input-friend-name"]').focus();
+    });
+    const copyBtn = root.querySelector('[data-testid="btn-copy-prompt"]');
+    if (copyBtn) copyBtn.addEventListener('click', function () { shareOrCopy(ASK_PROMPT); });
+    root.querySelector('[data-testid="btn-save-friend"]').addEventListener('click', function () { saveFriend(root); });
+    root.querySelector('[data-testid="btn-cancel-friend"]').addEventListener('click', function () { friendForm = null; renderFriends(); });
+    name.focus();
+  }
+
+  function collectFormItems(root) {
+    if (!friendForm) return;
+    const name = root.querySelector('[data-testid="input-friend-name"]');
+    if (name) friendForm.name = name.value;
+    for (let i = 0; i < MAX_ITEMS; i++) {
+      const input = root.querySelector('[data-testid="item-input-' + i + '"]');
+      const sel = root.querySelector('[data-testid="item-source-' + i + '"]');
+      if (input) friendForm.items[i].text = input.value;
+      if (sel) friendForm.items[i].source = sel.value;
+    }
+  }
+
+  function saveFriend(root) {
+    collectFormItems(root);
+    const name = (friendForm.name || '').trim();
+    if (!name) { toast('Add her name first.'); return; }
+    const items = friendForm.items
+      .map(function (it) { return { id: uid(), text: (it.text || '').trim(), source: it.source === 'in-her-words' ? 'in-her-words' : 'what-she-told-me' }; })
+      .filter(function (it) { return it.text; });
+    if (!items.length) { toast('Add at least one thing that matters to her.'); return; }
+    if (friendForm.id) {
+      const f = friendById(friendForm.id);
+      if (f) { f.name = name; f.items = items; }
+    } else {
+      if (state.friends.length >= MAX_FRIENDS) { toast('You already have 5 friends listed.'); return; }
+      state.friends.push({ id: uid(), name: name, items: items, isExample: false });
+    }
+    friendForm = null;
+    save();
+    renderFriends();
+    toast('Saved on this phone.');
+  }
+
+  function deleteFriend(id) {
+    const f = friendById(id);
+    if (!f) return;
+    if (!confirm('Remove ' + f.name + ' from your list? Past check-ins will still be in My Trends.')) return;
+    state.friends = state.friends.filter(function (x) { return x.id !== id; });
+    save();
+    renderFriends();
+  }
+
+  function exampleHistoryFor(friends) {
+    const byName = {};
+    friends.forEach(function (f) { byName[f.name] = f; });
+    const maya = byName.Maya, jordan = byName.Jordan, priya = byName.Priya;
+    function entry(days, hour, friend, outcome, worryNote, itemIndexes, madeRightDays) {
+      const selected = (itemIndexes || []).map(function (i) {
+        return { text: friend.items[i].text, friendName: friend.name, friendId: friend.id };
+      });
+      const rec = {
+        id: uid(),
+        date: daysAgo(days, hour),
+        friendId: friend.id,
+        friendName: friend.name,
+        worryNote: worryNote || '',
+        outcome: outcome,
+        selectedItems: selected,
+        noteToSelf: '',
+        isExample: true,
+        madeRightAt: null
+      };
+      if (outcome === 'made-it-right') rec.madeRightAt = daysAgo(madeRightDays == null ? Math.max(0, days - 1) : madeRightDays, 18);
+      return rec;
+    }
+    const list = [];
+    if (maya) {
+      list.push(entry(38, 15, maya, 'worry-only', 'I was afraid I left her out of a group chat.'));
+      list.push(entry(24, 19, maya, 'made-it-right', 'I cancelled plans last minute.', [2], 22));
+      list.push(entry(11, 14, maya, 'worry-only', 'Worried she thought I was ignoring her.'));
+      list.push(entry(3, 21, maya, 'worry-only', 'I overthought a short reply.'));
+    }
+    if (jordan) {
+      list.push(entry(31, 16, jordan, 'worry-only', 'Felt like I had been quiet too long.'));
+      list.push(entry(16, 13, jordan, 'worry-only', 'I was not sure if a joke landed wrong.'));
+      list.push(entry(6, 18, jordan, 'real-hurt', 'I put her in the middle of a messy group text.', [0]));
+    }
+    if (priya) {
+      list.push(entry(27, 17, priya, 'worry-only', 'Thought I might have broken a small promise.'));
+      list.push(entry(14, 20, priya, 'worry-only', 'Worried I chose a group hang when she wanted time.'));
+      list.push(entry(1, 12, priya, 'worry-only', 'I assumed she might be upset after school.'));
+    }
+    return list;
+  }
+
+  function loadExamples() {
+    const room = MAX_FRIENDS - state.friends.length;
+    if (room <= 0) { toast('You already have 5 friends. Remove one to load examples.'); return; }
+    const existingNames = new Set(state.friends.map(function (f) { return f.name.toLowerCase(); }));
+    const added = [];
+    EXAMPLE_FRIENDS.forEach(function (ex) {
+      if (state.friends.length >= MAX_FRIENDS) return;
+      if (existingNames.has(ex.name.toLowerCase())) return;
+      const friend = {
+        id: uid(),
+        name: ex.name,
+        isExample: true,
+        items: ex.items.map(function (text) { return { id: uid(), text: text, source: 'what-she-told-me' }; })
+      };
+      state.friends.push(friend);
+      added.push(friend);
+    });
+    if (!added.length) { toast('Example friends are already on your list, or there is not enough room.'); return; }
+    const histFriends = added.length === 3 ? added : state.friends.filter(function (f) { return f.isExample; });
+    state.history = state.history.concat(exampleHistoryFor(histFriends));
+    save();
+    renderFriends();
+    toast('Loaded fictional example friends. You can remove them anytime.');
+  }
+
+  function removeExamples() {
+    if (!confirm('Remove the fictional example friends and their example check-ins? Your own friends and check-ins will stay.')) return;
+    const exIds = {};
+    state.friends.filter(function (f) { return f.isExample; }).forEach(function (f) { exIds[f.id] = true; });
+    state.friends = state.friends.filter(function (f) { return !f.isExample; });
+    state.history = state.history.filter(function (h) { return !h.isExample && !exIds[h.friendId]; });
+    save();
+    renderFriends();
+    toast('Example friends removed.');
+  }
+
+  function exportJson() {
+    const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'lilbit-biglife-backup.json';
+    a.click();
+    setTimeout(function () { URL.revokeObjectURL(a.href); }, 500);
+    toast('Backup file ready.');
+  }
+
+  function importJson(file) {
+    const reader = new FileReader();
+    reader.onload = function () {
+      try {
+        const data = JSON.parse(reader.result);
+        if (!data || !Array.isArray(data.friends) || !Array.isArray(data.history)) throw new Error('shape');
+        if (!confirm('Replace what is saved on this phone with this backup? This cannot be undone.')) return;
+        state = { version: 1, friends: data.friends, history: data.history };
+        friendForm = null;
+        checkin = null;
+        save();
+        setTab(tab);
+        toast('Backup imported.');
+      } catch (e) { toast('That file does not look like a LilBit BigLife backup.'); }
+    };
+    reader.readAsText(file);
+  }
+
+  function resetAll() {
+    if (!confirm('This will erase your friends, check-ins, and trends from this phone. This cannot be undone.')) return;
+    state = defaultState();
+    friendForm = null;
+    checkin = null;
+    save();
+    setTab('friends');
+    toast('Everything on this phone was cleared.');
+  }
+
+  function freshCheckin() {
+    return {
+      step: 'pick',
+      friendId: '',
+      unsure: false,
+      worryNote: '',
+      selected: {},
+      none: false,
+      noteToSelf: '',
+      affirmation: ''
+    };
+  }
+
+  function visibleItems() {
+    if (!checkin) return [];
+    if (checkin.unsure || checkin.friendId === 'unsure') {
+      const rows = [];
+      state.friends.forEach(function (f) {
+        f.items.forEach(function (it, idx) {
+          rows.push({ key: f.id + ':' + it.id, friend: f, item: it, idx: idx });
+        });
+      });
+      return rows;
+    }
+    const f = friendById(checkin.friendId);
+    if (!f) return [];
+    return f.items.map(function (it, idx) {
+      return { key: f.id + ':' + it.id, friend: f, item: it, idx: idx };
+    });
+  }
+
+  function selectedItemsList() {
+    return visibleItems().filter(function (row) { return checkin.selected[row.key]; }).map(function (row) {
+      return { text: row.item.text, friendName: row.friend.name, friendId: row.friend.id, key: row.key };
+    });
+  }
+
+  function chosenFriendName() {
+    if (!checkin) return 'your friend';
+    if (checkin.unsure || checkin.friendId === 'unsure') return 'your friends';
+    const f = friendById(checkin.friendId);
+    return f ? f.name : 'your friend';
+  }
+
+  function renderWorried() {
+    const root = document.getElementById('view-worried');
+    if (!state.friends.length) {
+      root.innerHTML = '<article class="card empty" data-testid="worried-empty"><p>Add a friend first, LillyClaire — then you can check a worry against what they have told you.</p><div class="actions"><button type="button" class="btn-primary" data-goto-friends>Go to Friends</button></div></article>';
+      root.querySelector('[data-goto-friends]').addEventListener('click', function () { setTab('friends'); });
+      return;
+    }
+    if (!checkin) checkin = freshCheckin();
+    if (checkin.step === 'pick') renderPick(root);
+    else if (checkin.step === 'items') renderItems(root);
+    else if (checkin.step === 'reconcile') renderReconcile(root);
+    else if (checkin.step === 'belief') renderBelief(root);
+    else if (checkin.step === 'unsure') renderUnsure(root);
+    else if (checkin.step === 'affirmation') renderAffirmation(root);
+    else if (checkin.step === 'ask-first') renderAskFirst(root);
+  }
+
+  function renderPick(root) {
+    let html = '<article class="card" data-testid="worried-pick">';
+    html += '<h2>I\'m worried, LillyClaire</h2>';
+    html += '<p>Let\'s check this worry against what your friends have actually told you. You don\'t have to decide how you feel first — just the facts.</p>';
+    html += '<label for="select-friend">Which friend is this about?</label>';
+    html += '<select id="select-friend" data-testid="select-friend">';
+    html += '<option value="">Choose a friend</option>';
+    state.friends.forEach(function (f) {
+      html += '<option value="' + escapeHtml(f.id) + '"' + (checkin.friendId === f.id ? ' selected' : '') + '>' + escapeHtml(f.name) + '</option>';
+    });
+    html += '<option value="unsure"' + (checkin.friendId === 'unsure' ? ' selected' : '') + '>I\'m not sure which</option>';
+    html += '</select>';
+    html += '<label for="worry-note" style="margin-top:14px">What\'s on your mind? (optional)</label>';
+    html += '<textarea id="worry-note" data-testid="worry-note" maxlength="500" placeholder="A short note just for you">' + escapeHtml(checkin.worryNote) + '</textarea>';
+    html += '<div class="actions"><button type="button" class="btn-primary btn-block" data-testid="btn-start-checkin">Look at what they\'ve told you</button></div>';
+    html += '</article>';
+    root.innerHTML = html;
+    root.querySelector('[data-testid="select-friend"]').addEventListener('change', function (e) {
+      checkin.friendId = e.target.value;
+      checkin.unsure = e.target.value === 'unsure';
+    });
+    root.querySelector('[data-testid="worry-note"]').addEventListener('input', function (e) { checkin.worryNote = e.target.value; });
+    root.querySelector('[data-testid="btn-start-checkin"]').addEventListener('click', function () {
+      checkin.friendId = root.querySelector('[data-testid="select-friend"]').value;
+      checkin.unsure = checkin.friendId === 'unsure';
+      checkin.worryNote = root.querySelector('[data-testid="worry-note"]').value;
+      if (!checkin.friendId) { toast('Pick a friend, or choose "I\'m not sure which."'); return; }
+      const rows = visibleItems();
+      if (!rows.length) { toast('Add what matters to her before you check a worry against this list.'); return; }
+      checkin.selected = {};
+      checkin.none = false;
+      checkin.step = 'items';
+      renderWorried();
+    });
+  }
+
+  function renderItems(root) {
+    const name = chosenFriendName();
+    const rows = visibleItems();
+    let html = '<article class="card" data-testid="worried-items">';
+    html += '<h2>Did I do any of these?</h2>';
+    if (checkin.unsure) html += '<p>Here is what each friend has told you. Check anything you actually did. If you\'re not sure you did it, leave it unchecked.</p>';
+    else html += '<p>These are the things that hurt or disappoint <strong>' + escapeHtml(name) + '</strong> most. Check any you actually did. If you\'re not sure, leave it unchecked — don\'t assume the worst.</p>';
+    html += '<div class="stack" data-testid="item-checks">';
+    let lastFriend = '';
+    rows.forEach(function (row, i) {
+      if (checkin.unsure && row.friend.name !== lastFriend) {
+        html += '<h3 style="margin-top:8px">' + escapeHtml(row.friend.name) + '</h3>';
+        lastFriend = row.friend.name;
+      }
+      const on = !!checkin.selected[row.key];
+      html += '<label class="choice' + (on ? ' selected' : '') + '">';
+      html += '<input type="checkbox" data-testid="item-check-' + i + '" data-key="' + escapeHtml(row.key) + '"' + (on ? ' checked' : '') + '>';
+      html += '<span class="choice-body">' + escapeHtml(row.item.text) + '</span></label>';
+    });
+    html += '<label class="choice' + (checkin.none ? ' selected' : '') + '">';
+    html += '<input type="checkbox" data-testid="btn-none"' + (checkin.none ? ' checked' : '') + '>';
+    html += '<span class="choice-body"><strong>None of these</strong></span></label>';
+    html += '</div>';
+    html += '<div class="actions">';
+    html += '<button type="button" class="btn-primary btn-block" data-testid="btn-continue-items">Continue</button>';
+    html += '<button type="button" class="btn-text" data-testid="btn-back-pick">Back</button>';
+    html += '</div></article>';
+    root.innerHTML = html;
+    root.querySelectorAll('input[data-key]').forEach(function (inp) {
+      inp.addEventListener('change', function () {
+        if (inp.checked) {
+          checkin.selected[inp.getAttribute('data-key')] = true;
+          checkin.none = false;
+        } else {
+          delete checkin.selected[inp.getAttribute('data-key')];
+        }
+        renderWorried();
+      });
+    });
+    root.querySelector('[data-testid="btn-none"]').addEventListener('change', function (e) {
+      checkin.none = e.target.checked;
+      if (checkin.none) checkin.selected = {};
+      renderWorried();
+    });
+    root.querySelector('[data-testid="btn-continue-items"]').addEventListener('click', function () {
+      const selected = selectedItemsList();
+      if (!checkin.none && !selected.length) { toast('Check anything you did, or choose "None of these."'); return; }
+      if (checkin.none || !selected.length) checkin.step = 'belief';
+      else checkin.step = 'reconcile';
+      renderWorried();
+    });
+    root.querySelector('[data-testid="btn-back-pick"]').addEventListener('click', function () { checkin.step = 'pick'; renderWorried(); });
+  }
+
+  function renderReconcile(root) {
+    const selected = selectedItemsList();
+    let html = '<article class="card" data-testid="reconcile-view">';
+    html += '<h2>Own it — without spiraling</h2>';
+    html += '<p>LillyClaire, one mistake doesn\'t make you a bad friend. Owning it and making it right is what a good friend does.</p>';
+    selected.forEach(function (it) {
+      html += '<div class="card soft" style="box-shadow:none">';
+      html += '<h3>' + escapeHtml(it.friendName) + '</h3>';
+      html += '<p>' + escapeHtml(it.text) + '</p>';
+      html += '<p class="hint">If this is real, a simple, sincere step is enough. You don\'t have to over-explain or punish yourself.</p>';
+      html += '</div>';
+    });
+    html += '<h3>Ways to make it right</h3>';
+    html += '<ul>';
+    html += '<li>Talk in person if you can, or send a sincere text if that\'s kinder right now.</li>';
+    html += '<li>Use your own words. A short apology is enough.</li>';
+    html += '<li>Ask how you can make it right, and then listen.</li>';
+    html += '<li>If she needs space, give it. Following up later still counts.</li>';
+    html += '</ul>';
+    html += '<p class="label">A sincere apology you can make your own</p>';
+    html += '<div class="template" data-testid="apology-template">I\'m sorry I ___. I care about you and I\'ll ___.</div>';
+    html += '<div class="actions"><button type="button" class="btn-ghost" data-testid="btn-copy-apology">Copy this wording</button></div>';
+    html += '<label for="note-to-self" style="margin-top:12px">A note to yourself (optional)</label>';
+    html += '<textarea id="note-to-self" data-testid="note-to-self" maxlength="500" placeholder="What do you want to remember, or do next?">' + escapeHtml(checkin.noteToSelf) + '</textarea>';
+    html += '<div class="actions">';
+    html += '<button type="button" class="btn-primary btn-block" data-testid="btn-save-reconcile">Save this check-in</button>';
+    html += '<button type="button" class="btn-text" data-testid="btn-back-items">Back</button>';
+    html += '</div></article>';
+    root.innerHTML = html;
+    root.querySelector('[data-testid="note-to-self"]').addEventListener('input', function (e) { checkin.noteToSelf = e.target.value; });
+    root.querySelector('[data-testid="btn-copy-apology"]').addEventListener('click', function () {
+      shareOrCopy("I'm sorry I ___. I care about you and I'll ___.");
+    });
+    root.querySelector('[data-testid="btn-save-reconcile"]').addEventListener('click', function () {
+      checkin.noteToSelf = root.querySelector('[data-testid="note-to-self"]').value;
+      saveCheckin('real-hurt');
+      toast('Saved. You can mark it "made it right" later in My Trends.');
+      checkin = null;
+      setTab('trends');
+    });
+    root.querySelector('[data-testid="btn-back-items"]').addEventListener('click', function () { checkin.step = 'items'; renderWorried(); });
+  }
+
+  function renderBelief(root) {
+    const name = chosenFriendName();
+    const question = (checkin.unsure || checkin.friendId === 'unsure')
+      ? 'Do you believe your friends told you the truth about what hurts them?'
+      : 'Do you believe ' + name + ' told you the truth about what hurts her?';
+    let html = '<article class="card" data-testid="belief-view">';
+    html += '<h2>Check the fear against the truth</h2>';
+    html += '<p>You didn\'t do any of the things on the list. The next question is a gentle one, LillyClaire:</p>';
+    html += '<p><strong data-testid="belief-question">' + escapeHtml(question) + '</strong></p>';
+    html += '<div class="actions">';
+    html += '<button type="button" class="btn-primary btn-block" data-testid="belief-yes">Yes</button>';
+    html += '<button type="button" class="btn-ghost btn-block" data-testid="belief-unsure">I\'m not sure</button>';
+    html += '</div>';
+    html += '<div class="actions"><button type="button" class="btn-text" data-testid="btn-back-items">Back</button></div>';
+    html += '</article>';
+    root.innerHTML = html;
+    root.querySelector('[data-testid="belief-yes"]').addEventListener('click', goAffirmation);
+    root.querySelector('[data-testid="belief-unsure"]').addEventListener('click', function () { checkin.step = 'unsure'; renderWorried(); });
+    root.querySelector('[data-testid="btn-back-items"]').addEventListener('click', function () { checkin.step = 'items'; renderWorried(); });
+  }
+
+  function renderUnsure(root) {
+    let html = '<article class="card" data-testid="unsure-view">';
+    html += '<h2>You don\'t have to assume the worst</h2>';
+    html += '<p>Real friends usually tell us what matters to them. If you\'re still not sure, you can ask ' + (checkin.unsure ? 'them' : 'her') + ' directly — you don\'t have to guess, and you don\'t have to treat a worry like a fact.</p>';
+    html += '<p class="label">A message you can send if you want to ask</p>';
+    html += '<div class="prompt-box" data-testid="ask-again-prompt">' + escapeHtml(ASK_AGAIN) + '</div>';
+    html += '<div class="actions"><button type="button" class="btn-ghost" data-testid="btn-ask-template">Share or copy this</button></div>';
+    html += '<div class="actions">';
+    html += '<button type="button" class="btn-primary btn-block" data-testid="btn-believe-now">Yes — I believe ' + (checkin.unsure ? 'them' : 'her') + '</button>';
+    html += '<button type="button" class="btn-ghost btn-block" data-testid="btn-ask-first">I\'ll ask first</button>';
+    html += '</div></article>';
+    root.innerHTML = html;
+    root.querySelector('[data-testid="btn-ask-template"]').addEventListener('click', function () { shareOrCopy(ASK_AGAIN); });
+    root.querySelector('[data-testid="btn-believe-now"]').addEventListener('click', goAffirmation);
+    root.querySelector('[data-testid="btn-ask-first"]').addEventListener('click', function () {
+      saveCheckin('paused-to-ask');
+      checkin.step = 'ask-first';
+      renderWorried();
+    });
+  }
+
+  function goAffirmation() {
+    affirmIndex = Math.floor(Math.random() * AFFIRMATIONS.length);
+    checkin.affirmation = AFFIRMATIONS[affirmIndex];
+    saveCheckin('worry-only');
+    checkin.step = 'affirmation';
+    renderWorried();
+  }
+
+  function renderAffirmation(root) {
+    const line = checkin.affirmation || AFFIRMATIONS[0];
+    let html = '<article class="card affirmation-view" data-testid="affirmation-view">';
+    html += '<div class="brand-kicker">A reminder for you</div>';
+    html += '<p class="affirmation-text" data-testid="affirmation-text">' + escapeHtml(line) + '</p>';
+    html += '<p class="family-saying" data-testid="family-saying">' + escapeHtml(FAMILY_SAYING) + '</p>';
+    html += '<div class="actions" style="justify-content:center">';
+    html += '<button type="button" class="btn-primary" data-testid="btn-see-trends">See my trends</button>';
+    html += '<button type="button" class="btn-ghost" data-testid="btn-done-checkin">Done</button>';
+    html += '</div></article>';
+    root.innerHTML = html;
+    root.querySelector('[data-testid="btn-see-trends"]').addEventListener('click', function () { checkin = null; setTab('trends'); });
+    root.querySelector('[data-testid="btn-done-checkin"]').addEventListener('click', function () { checkin = null; renderWorried(); });
+  }
+
+  function renderAskFirst(root) {
+    let html = '<article class="card affirmation-view" data-testid="ask-first-view">';
+    html += '<h2>It\'s wise to ask instead of guessing</h2>';
+    html += '<p>LillyClaire, you don\'t have to carry this as a sure thing. Ask, then listen. Assume the best until you hear otherwise.</p>';
+    html += '<p class="family-saying">' + escapeHtml(FAMILY_SAYING) + '</p>';
+    html += '<div class="actions" style="justify-content:center">';
+    html += '<button type="button" class="btn-primary" data-testid="btn-done-checkin">Done</button>';
+    html += '</div></article>';
+    root.innerHTML = html;
+    root.querySelector('[data-testid="btn-done-checkin"]').addEventListener('click', function () { checkin = null; renderWorried(); });
+  }
+
+  function saveCheckin(outcome) {
+    const unsure = checkin.unsure || checkin.friendId === 'unsure';
+    const friend = unsure ? null : friendById(checkin.friendId);
+    state.history.unshift({
+      id: uid(),
+      date: new Date().toISOString(),
+      friendId: friend ? friend.id : null,
+      friendName: friend ? friend.name : (unsure ? 'Not sure which friend' : 'A friend'),
+      worryNote: (checkin.worryNote || '').trim(),
+      outcome: outcome,
+      selectedItems: outcome === 'real-hurt' ? selectedItemsList() : [],
+      noteToSelf: (checkin.noteToSelf || '').trim(),
+      isExample: false,
+      madeRightAt: null
+    });
+    save();
+  }
+
+  function computeTrends() {
+    const history = state.history.slice().sort(function (a, b) { return new Date(a.date) - new Date(b.date); });
+    const worryOnly = history.filter(function (h) { return h.outcome === 'worry-only'; }).length;
+    const realHurt = history.filter(function (h) { return h.outcome === 'real-hurt'; }).length;
+    const madeRight = history.filter(function (h) { return h.outcome === 'made-it-right'; }).length;
+    const paused = history.filter(function (h) { return h.outcome === 'paused-to-ask'; }).length;
+    const total = history.length;
+    const factBase = worryOnly + realHurt + madeRight;
+    const fearPercent = factBase ? Math.round((worryOnly / factBase) * 100) : null;
+    const hurts = history.filter(function (h) { return h.outcome === 'real-hurt' || h.outcome === 'made-it-right'; });
+    const lastHurt = hurts.length ? hurts[hurts.length - 1] : null;
+    let streakDays = null;
+    let streakCheckins = null;
+    let clearStreak = false;
+    if (lastHurt) {
+      streakDays = Math.max(0, Math.round((startOfDay(new Date()) - startOfDay(lastHurt.date)) / 86400000));
+      const lastTime = new Date(lastHurt.date).getTime();
+      streakCheckins = history.filter(function (h) { return new Date(h.date).getTime() > lastTime; }).length;
+    } else if (total) {
+      clearStreak = true;
+      const first = history[0];
+      streakDays = Math.max(0, Math.round((startOfDay(new Date()) - startOfDay(first.date)) / 86400000));
+      streakCheckins = total;
+    }
+    const byFriend = {};
+    history.forEach(function (h) {
+      const name = h.friendName || 'Not sure which friend';
+      if (!byFriend[name]) byFriend[name] = { total: 0, worryOnly: 0, realHurt: 0, madeRight: 0, paused: 0 };
+      const b = byFriend[name];
+      b.total++;
+      if (h.outcome === 'worry-only') b.worryOnly++;
+      if (h.outcome === 'real-hurt') b.realHurt++;
+      if (h.outcome === 'made-it-right') b.madeRight++;
+      if (h.outcome === 'paused-to-ask') b.paused++;
+    });
+    return { history: history, total: total, worryOnly: worryOnly, realHurt: realHurt, madeRight: madeRight, paused: paused, factBase: factBase, fearPercent: fearPercent, lastHurt: lastHurt, streakDays: streakDays, streakCheckins: streakCheckins, clearStreak: clearStreak, byFriend: byFriend };
+  }
+
+  function encouragement(t) {
+    if (!t.total) {
+      return "When you start checking in, LillyClaire, you'll see a picture of how often worry is just worry. There's nothing here yet — and that's okay.";
+    }
+    if (t.factBase === 0) {
+      return "You've started, LillyClaire. As you finish a few check-ins, this page will show you how often the worry was only a worry.";
+    }
+    const noun = t.factBase === 1 ? 'worry was' : 'worries were';
+    let msg = 'LillyClaire, ' + t.worryOnly + ' of ' + t.factBase + ' ' + noun + ' just worry. Nobody\'s perfect — you\'re wildly good even though imperfect.';
+    if (t.madeRight && t.realHurt === 0) msg += ' And when something was real, you made it right.';
+    else if (t.madeRight) msg += ' You\'ve also practiced making it right — that matters.';
+    return msg;
+  }
+
+  function outcomeBucket(outcome) {
+    if (outcome === 'worry-only') return 'worryOnly';
+    if (outcome === 'real-hurt') return 'realHurt';
+    if (outcome === 'made-it-right') return 'madeRight';
+    return 'paused';
+  }
+
+  function renderChart(t) {
+    const width = 680, height = 220, padL = 28, padR = 8, padT = 16, padB = 40;
+    const buckets = [];
+    const now = new Date();
+    if (chartRange === 'monthly') {
+      for (let i = 5; i >= 0; i--) {
+        const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
+        buckets.push({ key: monthKey(d), label: d.toLocaleDateString(undefined, { month: 'short' }), worryOnly: 0, realHurt: 0, madeRight: 0, paused: 0 });
+      }
+      t.history.forEach(function (h) {
+        const b = buckets.find(function (x) { return x.key === monthKey(h.date); });
+        const k = outcomeBucket(h.outcome);
+        if (b && b[k] != null) b[k]++;
+      });
+    } else {
+      const thisMon = mondayOf(now);
+      for (let i = 7; i >= 0; i--) {
+        const d = new Date(thisMon);
+        d.setDate(thisMon.getDate() - i * 7);
+        const end = new Date(d); end.setDate(d.getDate() + 6);
+        buckets.push({ key: localKey(d), label: d.toLocaleDateString(undefined, { month: 'short', day: 'numeric' }), start: d, end: end, worryOnly: 0, realHurt: 0, madeRight: 0, paused: 0 });
+      }
+      t.history.forEach(function (h) {
+        const dt = startOfDay(h.date);
+        const b = buckets.find(function (x) { return dt >= x.start && dt <= x.end; });
+        const k = outcomeBucket(h.outcome);
+        if (b && b[k] != null) b[k]++;
+      });
+    }
+    const max = Math.max(1, Math.max.apply(null, buckets.map(function (b) { return b.worryOnly + b.realHurt + b.madeRight + b.paused; })));
+    const innerW = width - padL - padR;
+    const innerH = height - padT - padB;
+    const gap = 10;
+    const barW = (innerW - gap * (buckets.length - 1)) / buckets.length;
+    const colors = { worryOnly: '#B8894A', realHurt: '#C45B62', madeRight: '#5E7A68', paused: '#C5B8A8' };
+    let svg = '<svg viewBox="0 0 ' + width + ' ' + height + '" role="img" data-testid="trends-chart" aria-label="Check-ins by ' + (chartRange === 'monthly' ? 'month' : 'week') + '">';
+    svg += '<line x1="' + padL + '" y1="' + (padT + innerH) + '" x2="' + (width - padR) + '" y2="' + (padT + innerH) + '" stroke="#E6D9CE" stroke-width="1"/>';
+    buckets.forEach(function (b, i) {
+      const x = padL + i * (barW + gap);
+      let y = padT + innerH;
+      ['paused', 'realHurt', 'madeRight', 'worryOnly'].forEach(function (k) {
+        const val = b[k];
+        if (!val) return;
+        const h = (val / max) * innerH;
+        y -= h;
+        svg += '<rect x="' + x.toFixed(1) + '" y="' + y.toFixed(1) + '" width="' + Math.max(barW, 1).toFixed(1) + '" height="' + h.toFixed(1) + '" fill="' + colors[k] + '" rx="3"/>';
+      });
+      svg += '<text x="' + (x + barW / 2).toFixed(1) + '" y="' + (height - 14) + '" text-anchor="middle" font-size="11" fill="#6B5A54">' + escapeHtml(b.label) + '</text>';
+    });
+    svg += '</svg>';
+    return svg;
+  }
+
+  function outcomeChip(outcome) {
+    if (outcome === 'worry-only') return '<span class="chip worry">Worry only (did none)</span>';
+    if (outcome === 'real-hurt') return '<span class="chip hurt">Real hurt</span>';
+    if (outcome === 'made-it-right') return '<span class="chip right">Made it right</span>';
+    if (outcome === 'paused-to-ask') return '<span class="chip paused">Paused to ask</span>';
+    return '<span class="chip">' + escapeHtml(outcome) + '</span>';
+  }
+
+  function renderTrends() {
+    const root = document.getElementById('view-trends');
+    const t = computeTrends();
+    let html = '<article class="card" data-testid="trends-summary">';
+    html += '<h2>My Trends</h2>';
+    html += '<p class="encouragement" data-testid="encouragement">' + escapeHtml(encouragement(t)) + '</p>';
+    if (!t.total) {
+      html += '<div class="empty" data-testid="trends-empty">No check-ins yet. When a worry shows up, start with I\'m Worried — this page will keep a gentle picture of what happened.</div>';
+      html += '</article>';
+      root.innerHTML = html;
+      return;
+    }
+    html += '<div class="stats">';
+    html += '<div class="stat"><span class="stat-value" data-testid="stat-total">' + t.total + '</span><span class="stat-label">Total worries</span></div>';
+    html += '<div class="stat"><span class="stat-value" data-testid="stat-worry">' + t.worryOnly + '</span><span class="stat-label">Worry only</span></div>';
+    html += '<div class="stat"><span class="stat-value" data-testid="stat-hurt">' + t.realHurt + '</span><span class="stat-label">Real hurt</span></div>';
+    html += '<div class="stat"><span class="stat-value" data-testid="stat-right">' + t.madeRight + '</span><span class="stat-label">Made it right</span></div>';
+    html += '</div>';
+    if (t.fearPercent != null) {
+      html += '<p style="margin-top:14px" data-testid="fear-percent"><strong>' + t.fearPercent + '%</strong> of your completed check-ins were fear, not fact.</p>';
+    }
+    if (t.clearStreak) {
+      html += '<p data-testid="streak">No real hurt in any of your check-ins, LillyClaire — and you\'ve been showing up for this' + (t.streakDays != null ? ' for ' + t.streakDays + ' day' + (t.streakDays === 1 ? '' : 's') : '') + '.</p>';
+    } else if (t.streakDays != null) {
+      html += '<p data-testid="streak">' + t.streakDays + ' day' + (t.streakDays === 1 ? '' : 's') + ' and ' + t.streakCheckins + ' check-in' + (t.streakCheckins === 1 ? '' : 's') + ' since the last real hurt.</p>';
+    }
+    html += '</article>';
+
+    html += '<article class="card">';
+    html += '<div class="row spread"><h3 style="margin:0">Over time</h3>';
+    html += '<div class="range-toggle">';
+    html += '<button type="button" data-testid="chart-range-weekly" aria-pressed="' + (chartRange === 'weekly' ? 'true' : 'false') + '">Weekly</button>';
+    html += '<button type="button" data-testid="chart-range-monthly" aria-pressed="' + (chartRange === 'monthly' ? 'true' : 'false') + '">Monthly</button>';
+    html += '</div></div>';
+    html += '<div class="chart-wrap">' + renderChart(t) + '</div>';
+    html += '<div class="legend">';
+    html += '<span><i class="swatch" style="background:#B8894A"></i>Worry only</span>';
+    html += '<span><i class="swatch" style="background:#C45B62"></i>Real hurt</span>';
+    html += '<span><i class="swatch" style="background:#5E7A68"></i>Made it right</span>';
+    html += '<span><i class="swatch" style="background:#C5B8A8"></i>Paused to ask</span>';
+    html += '</div></article>';
+
+    html += '<article class="card"><h3>By friend</h3>';
+    Object.keys(t.byFriend).forEach(function (name) {
+      const b = t.byFriend[name];
+      html += '<div class="row spread" style="padding:8px 0;border-top:1px solid var(--line)" data-testid="friend-stat">';
+      html += '<div><strong>' + escapeHtml(name) + '</strong><div class="hint">' + b.total + ' check-in' + (b.total === 1 ? '' : 's') + '</div></div>';
+      html += '<div class="hint">Worry only ' + b.worryOnly + ' · Real ' + b.realHurt + ' · Made right ' + b.madeRight + '</div>';
+      html += '</div>';
+    });
+    html += '</article>';
+
+    html += '<article class="card"><h3>Check-in history</h3>';
+    html += '<div data-testid="history-list">';
+    state.history.slice().sort(function (a, b) { return new Date(b.date) - new Date(a.date); }).forEach(function (h) {
+      html += '<div class="history-item card soft" data-testid="history-item" data-history-id="' + escapeHtml(h.id) + '">';
+      html += '<div class="row spread"><strong>' + escapeHtml(h.friendName) + '</strong>' + outcomeChip(h.outcome) + '</div>';
+      html += '<div class="history-meta">' + escapeHtml(formatDate(h.date)) + (h.isExample ? ' · Example' : '') + '</div>';
+      if (h.worryNote) html += '<p>' + escapeHtml(h.worryNote) + '</p>';
+      if (h.selectedItems && h.selectedItems.length) {
+        html += '<ul>' + h.selectedItems.map(function (it) { return '<li>' + escapeHtml(it.text) + '</li>'; }).join('') + '</ul>';
+      }
+      if (h.noteToSelf) html += '<p class="hint">Note to self: ' + escapeHtml(h.noteToSelf) + '</p>';
+      html += '<div class="actions">';
+      if (h.outcome === 'real-hurt') html += '<button type="button" class="btn-sage" data-testid="btn-made-right" data-made-right="' + escapeHtml(h.id) + '">I made it right</button>';
+      html += '<button type="button" class="btn-danger" data-delete-history="' + escapeHtml(h.id) + '">Delete</button>';
+      html += '</div></div>';
+    });
+    html += '</div></article>';
+    root.innerHTML = html;
+
+    const weekly = root.querySelector('[data-testid="chart-range-weekly"]');
+    const monthly = root.querySelector('[data-testid="chart-range-monthly"]');
+    if (weekly) weekly.addEventListener('click', function () { chartRange = 'weekly'; renderTrends(); });
+    if (monthly) monthly.addEventListener('click', function () { chartRange = 'monthly'; renderTrends(); });
+    root.querySelectorAll('[data-made-right]').forEach(function (btn) {
+      btn.addEventListener('click', function () { markMadeRight(btn.getAttribute('data-made-right')); });
+    });
+    root.querySelectorAll('[data-delete-history]').forEach(function (btn) {
+      btn.addEventListener('click', function () { deleteHistory(btn.getAttribute('data-delete-history')); });
+    });
+  }
+
+  function markMadeRight(id) {
+    const h = state.history.find(function (x) { return x.id === id; });
+    if (!h) return;
+    h.outcome = 'made-it-right';
+    h.madeRightAt = new Date().toISOString();
+    save();
+    renderTrends();
+    toast('That\'s a good kind of courage, LillyClaire.');
+  }
+
+  function deleteHistory(id) {
+    if (!confirm('Delete this check-in from your history?')) return;
+    state.history = state.history.filter(function (h) { return h.id !== id; });
+    save();
+    renderTrends();
+  }
+
+  document.querySelectorAll('.tabbar [role="tab"]').forEach(function (btn) {
+    btn.addEventListener('click', function () { setTab(btn.id.replace('tab-', '')); });
+  });
+  document.getElementById('import-file').addEventListener('change', function (e) {
+    const file = e.target.files && e.target.files[0];
+    e.target.value = '';
+    if (file) importJson(file);
+  });
+
+  setTab('friends');
+})();
+
+  </script>
+</body>
+</html>

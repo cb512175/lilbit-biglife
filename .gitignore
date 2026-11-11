@@ -1,0 +1,7 @@
+shots/
+__pycache__/
+*.pyc
+.playwright-mcp/
+.DS_Store
+_part*.html
+_part*.js
